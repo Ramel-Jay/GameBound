@@ -17,8 +17,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->text('avatar_url');
             $table->string('team_name');
-            $table->string('game_id');
-            $table->string('game_name');
+            $table->string('username');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

@@ -31,15 +31,28 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'first_name'        => ['required', 'string', 'max:255'],
+            'last_name'         => ['required', 'string', 'max:255'],
+            'avatar_url'        => 'required|file|mimes:jpeg,png,jpg|max:2048',
+            'team_name'         => ['required', 'string', 'max:255'],
+            'username'          => ['required', 'string', 'max:255'],
+            'email'             => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password'          => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $avatarUrl = null;
+        if($request->hasFile('avatar_url')){
+            $avatarUrl = $request->avatar_url->store('avatar', 'public');
+        }
+
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'first_name'        => $request->first_name,
+            'last_name'         => $request->last_name,
+            'avatar_url'        => $avatarUrl,
+            'team_name'         => $request->team_name,
+            'username'          => $request->username,
+            'email'             => $request->email,
+            'password'          => Hash::make($request->password),
         ]);
 
         event(new Registered($user));

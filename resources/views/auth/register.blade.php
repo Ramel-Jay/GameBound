@@ -1,12 +1,40 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
 
-        <!-- Name -->
+        <!-- Avatar -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input-label for="avatar_url" :value="__('Profile Picture')" />
+            <x-text-input id="avatar_url" class="block mt-1 w-full" type="file" name="avatar_url" :value="old('avatar_url')" required autofocus autocomplete="off" />
+            <x-input-error :messages="$errors->get('avatar_url')" class="mt-2" />
+        </div>
+
+        <!-- First Name -->
+        <div>
+            <x-input-label for="first_name" :value="__('First Name')" />
+            <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus autocomplete="off" />
+            <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
+        </div>
+
+        <!-- Last Name -->
+        <div>
+            <x-input-label for="last_name" :value="__('Last Name')" />
+            <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autofocus autocomplete="off" />
+            <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+        </div>
+
+        <!-- Team Name -->
+        <div>
+            <x-input-label for="team_name" :value="__('Team Name')" />
+            <x-text-input id="team_name" class="block mt-1 w-full" type="text" name="team_name" :value="old('team_name')" required autofocus autocomplete="off" />
+            <x-input-error :messages="$errors->get('team_name')" class="mt-2" />
+        </div>
+
+        <!-- username -->
+        <div>
+            <x-input-label for="username" :value="__('Username')" />
+            <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus autocomplete="off" />
+            <x-input-error :messages="$errors->get('username')" class="mt-2" />
         </div>
 
         <!-- Email Address -->

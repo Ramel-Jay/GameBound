@@ -22,8 +22,7 @@ class User extends Authenticatable
         'last_name',
         'avatar_url',
         'team_name',
-        'game_id',
-        'game_name',
+        'username',
         'email',
         'password',
     ];
@@ -47,4 +46,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function saveImage($path){
+        return $this->avatar_url = $path;
+    }
 }
